@@ -1,50 +1,66 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Scaffold(body: JueStEdMi()));
-  }
-}
-
-class JueStEdMi extends StatefulWidget {
-  const JueStEdMi({super.key});
-
-  @override
-  State<JueStEdMi> createState() => _JueStEdMiState();
-}
-
-class _JueStEdMiState extends State<JueStEdMi> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: list.length,
-          itemBuilder: (context, index) {
-            return ListTile(title: Text(list[index]));
-          },
-        ),
-        ElevatedButton(
-          onPressed: iDeleteTheLastPosition,
-          child: const Text('Delete Last Position'),
-        ),
-      ],
+    return MaterialApp(
+      title: 'Prozentuale Höhenaufteilung',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const MyHomePage(),
     );
   }
-
-  void iDeleteTheLastPosition() {
-    setState(() {
-      list.removeLast();
-    });
-  }
 }
 
-List<String> list = ['Wir', 'wünschen', 'Euch', 'einen', 'schönen', 'Mittwoch'];
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF68829E),
+      appBar: AppBar(
+        title: const Text('4_4_3_Widgets_V'),
+        backgroundColor: Color(0xFFAEBD38),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 2,
+            child: Container(
+              alignment: Alignment.center,
+              child: const Text(
+                'Willkommen zur App!',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 6,
+
+            child: Image.network(
+              'https://picsum.photos/500/800',
+              fit: BoxFit.fill,
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(16.0),
+              child: const Text(
+                'Hier sieht man einen Screen mit drei verschieden großen Bereichen.',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
